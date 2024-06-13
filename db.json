@@ -1,0 +1,10 @@
+{
+    "users": [
+        {
+            "id" : 1,
+            "title": "json-server",
+            "content": "json-server 배우기"
+        }
+    ],
+    "posts": []
+}
