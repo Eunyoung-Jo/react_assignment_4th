@@ -1,12 +1,11 @@
+import React from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import Home from './pages/Home';
-import Detail from './pages/Detail';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import './App.css';
 import Form from './components/Form';
-import axiosInstance from './api/axiosInstance';
-import { useEffect } from 'react';
-import { loginSuccess, logout } from './redux/slices/authSlice';
+import Home from './pages/Home';
+import Detail from './pages/Detail';
+import Layout from './components/Layout';
 
 const ProtectedRoute = ({ element }) => {
   const { accessToken } = useSelector((state) => state.auth);
@@ -14,28 +13,13 @@ const ProtectedRoute = ({ element }) => {
 };
 
 function App() {
-  const dispatch = useDispatch();
-  const { accessToken } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      if (accessToken) {
-        try {
-          const response = await axiosInstance.get('/user');
-          dispatch(loginSuccess({ user: response.data, accessToken }));
-        } catch (error) {
-          dispatch(logout());
-        }
-      }
-    };
-    checkAuth();
-  }, [dispatch, accessToken]);
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<ProtectedRoute element={<Home />} />} />
-        <Route path="/detail/:id" element={<ProtectedRoute element={<Detail />} />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<ProtectedRoute element={<Home />} />} />
+          <Route path="detail/:id" element={<ProtectedRoute element={<Detail />} />} />
+        </Route>
         <Route path="/login" element={<Form />} />
         <Route path="/register" element={<Form />} />
       </Routes>

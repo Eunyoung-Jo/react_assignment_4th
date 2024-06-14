@@ -82,7 +82,7 @@ const Form = () => {
           },
           accessToken: response.data.accessToken
         }));
-        navigate('/profile'); // 로그인 성공 후 프로필 페이지로 이동
+        navigate('/'); // 로그인 성공 후 홈 페이지로 이동
       }
     } catch (err) {
       if (isRegister) {

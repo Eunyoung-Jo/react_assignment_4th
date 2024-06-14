@@ -2,8 +2,9 @@ import { Section } from "../pages/Home";
 import styled from "styled-components";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addExpense } from "../redux/slices/expensesSlice";
+import { selectUser } from "../redux/slices/authSlice"; // 추가
 
 const InputRow = styled.div`
   display: flex;
@@ -56,6 +57,9 @@ export default function CreateExpense({ month }) {
   const [newAmount, setNewAmount] = useState("");
   const [newDescription, setNewDescription] = useState("");
 
+  // 사용자 정보를 Redux store에서 가져오기
+  const user = useSelector(selectUser);
+
   const handleAddExpense = () => {
     const datePattern = /^\d{4}-\d{2}-\d{2}$/;
     if (!datePattern.test(newDate)) {
@@ -76,6 +80,8 @@ export default function CreateExpense({ month }) {
       item: newItem,
       amount: parsedAmount,
       description: newDescription,
+      createdBy: user ? user.name : "Unknown", // 사용자가 없을 경우 기본값 처리
+      userId: user ? user.id : null, // 사용자가 없을 경우 null 처리
     };
 
     dispatch(addExpense(newExpense));

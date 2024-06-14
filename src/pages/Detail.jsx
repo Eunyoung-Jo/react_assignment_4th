@@ -64,6 +64,7 @@ export default function Detail() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const expenses = useSelector((state) => state.expenses);
+  const user = useSelector((state) => state.user);
 
   const selectedExpense = expenses.find((element) => element.id === id);
 
@@ -89,6 +90,8 @@ export default function Detail() {
       item: item,
       amount: amount,
       description: description,
+      createdBy: selectedExpense.createdBy,
+      userId: selectedExpense.userId,
     };
 
     dispatch(editExpense(newExpense));
@@ -142,6 +145,7 @@ export default function Detail() {
           placeholder="지출 내용"
         />
       </InputGroup>
+      <p>작성한 사용자: {selectedExpense.userId}</p>
       <ButtonGroup>
         <Button onClick={handleEdit}>수정</Button>
         <Button danger="true" onClick={handleDelete}>

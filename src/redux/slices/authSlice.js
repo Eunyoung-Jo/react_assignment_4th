@@ -33,4 +33,8 @@ const authSlice = createSlice({
 });
 
 export const { loginSuccess, loginFailure, logout, registerFailure, clearError } = authSlice.actions;
+
+// 사용자 정보를 선택하는 selector 함수 정의
+export const selectUser = (state) => state.auth.user;
+
 export default authSlice.reducer;
