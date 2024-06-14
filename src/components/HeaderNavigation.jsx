@@ -5,9 +5,11 @@ import { logout } from '../redux/slices/authSlice';
 import styled from 'styled-components';
 
 const HeaderContainer = styled.header`
-  background-color: #333;
+  background-color: #mint;
+  border: solid;
   color: #fff;
-  padding: 10px 0;
+  padding: 10px 10px;
+  margin: 20px 0;
 `;
 
 const Navigation = styled.nav`
@@ -29,6 +31,7 @@ const MenuList = styled.ul`
 
 const MenuItem = styled.li`
   margin-left: 20px;
+  font-size: 20px;
 `;
 
 const LogoutButton = styled.button`
@@ -36,6 +39,7 @@ const LogoutButton = styled.button`
   color: #fff;
   border: none;
   cursor: pointer;
+  font-size: 20px;
 `;
 
 const HeaderNavigation = () => {

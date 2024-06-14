@@ -64,7 +64,7 @@ export default function Detail() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const expenses = useSelector((state) => state.expenses);
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.auth.user); // 사용자 정보 가져오기
 
   const selectedExpense = expenses.find((element) => element.id === id);
 
@@ -145,7 +145,7 @@ export default function Detail() {
           placeholder="지출 내용"
         />
       </InputGroup>
-      <p>작성한 사용자: {selectedExpense.userId}</p>
+      <p>작성한 사용자 : {user ? user.nickname : ""}</p> 
       <ButtonGroup>
         <Button onClick={handleEdit}>수정</Button>
         <Button danger="true" onClick={handleDelete}>
